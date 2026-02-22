@@ -1,5 +1,5 @@
-Finaly I could make an ESP32 controller for my Cambridge Audio CXA81 mk2 amplifier to control my amp from Homeassistant.
-This project useing RS232 and Cambridge control bus too, beacuse the volume control is not possible over RS232.
+Finaly I could make an ESP32 controller for my Cambridge Audio CXA81 mk2 amplifier to control my amp from Homeassistant without using custom component.
+This project using RS232 and Cambridge control bus too, beacuse the volume control is not possible over RS232.
 
 <img width="377" height="1151" alt="HA dashboard" src="https://github.com/user-attachments/assets/e68ffb2e-ec02-49c9-b978-61ca212ca768" />
 
