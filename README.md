@@ -1,4 +1,4 @@
-Finaly I could make an ESP32 controller for my Cambridge Audio CXA81 mk2 amplifier to control my amp from with Homeassistant.
+Finaly I could make an ESP32 controller for my Cambridge Audio CXA81 mk2 amplifier to control my amp from Homeassistant.
 This project useing RS232 and Cambridge control bus too, beacuse the volume control is not possible over RS232.
 Working commands:
   RS232:
@@ -6,15 +6,15 @@ Working commands:
     Mute
     Input select
     FW version / Protocol version / Error state
-    Raw RS232 string
+    Raw RS232 string for debug purposes
 
   CTRL BUS:
     Power ON and OFF
     Volume +
     Volume -
 
-RS232 commands have feedback to HA no matter you commanded from HA or with the genuine IR remote control. CTRL BUS have no feedback, just send the commans.
-Volume control is not possible on RS232 so ctrl bus used and I sniffed the volume commands from Cambridge streamer. The ctrl bus useing manchaster codes at 0-5V level and ESP GPIO is working on 3,3V so a level shifter will needed.
+RS232 commands have feedback to HA no matter you commanded from HA or with the IR remote control. CTRL BUS have no feedback, just sending the commands.
+Volume control is not possible over RS232 so ctrl bus used for Vol up and down. I sniffed the volume commands from Cambridge streamer and repoduced with ESP. The ctrl bus useing manchaster codes at 0-5V level but the ESP GPIO is working on 3,3V so a level shifter will be needed.
 
 Part list:
   ESP32 board
