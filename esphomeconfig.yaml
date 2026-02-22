@@ -1,11 +1,11 @@
 esphome:
   name: cambridge-esp-controller
   friendly_name: Cambridge CXA81 Controller
-#  on_boot:
-#    priority: -100
-#    then:
-#      - delay: 10s
-#      - script.execute: cxa81_query_state
+  on_boot:
+    priority: -100
+    then:
+      - delay: 10s
+      - script.execute: cxa81_query_state
 
 esp32:
   board: esp32dev
@@ -19,15 +19,6 @@ logger:
 captive_portal:
 
 api:
-#  encryption:
-#    key: "iniHjtEh2jFK4U+NJl/1+ICvT1jI/7Vn3mmPVTW3Lhs="
-  services:
-    - service: send_raw_command
-      variables:
-        command: int[]
-      then:
-        - remote_transmitter.transmit_raw:
-            code: !lambda 'return command;'
 
 ota:
   - platform: esphome
@@ -241,21 +232,6 @@ switch:
       - uart.write: "#01,04,00\r"
 
 button:
-# =========================
-# CXA CTRL BUS actions
-# =========================
-  - platform: template
-    name: "CXA - Power ON"
-    on_press:
-      - lambda: |-
-          id(manchester_code) = "10010000101110";
-      - script.execute: send_manchester
-  - platform: template
-    name: "CXA - Power OFF"
-    on_press:
-      - lambda: |-
-          id(manchester_code) = "10010000101111";
-      - script.execute: send_manchester
   - platform: template
     name: "CXA - Volume Down"
     on_press:
@@ -324,44 +300,17 @@ sensor:
       filters:
       - sliding_window_moving_average:
           window_size: 6
-          send_every: 2
+          send_every: 4
     humidity:
       name: "CXA81 Páratartalom"
       id: room_humidity
       filters:
       - sliding_window_moving_average:
           window_size: 5
-          send_every: 5
+          send_every: 10
     update_interval: 10s
 
-# =========================
-# IR TRANSMITTER
-# =========================
-remote_transmitter:
-  id: ir_tx
-  pin: GPIO18
-  carrier_duty_percent: 50%
-
-# =========================
-# IR RECEIVER (opcionális, tanításhoz / debughoz)
-# =========================
-#remote_receiver:
-#  id: ir_rx
-#  pin: GPIO19
-#  dump: all
-#  tolerance: 25%
-#  buffer_size: 2kb
-#  idle: 25ms
-
 script:
-  - id: cxa81_get_versions
-    mode: queued
-    then:
-      - logger.log: "CXA81 → Get protocol version"
-      - uart.write: "#13,01\r"
-      - delay: 300ms
-      - logger.log: "CXA81 → Get firmware version"
-      - uart.write: "#13,02\r"
   - id: cxa81_query_state
     mode: queued
     then:
