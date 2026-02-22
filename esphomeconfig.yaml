@@ -316,12 +316,12 @@ script:
     then:
       # --- Power state ---
       - logger.log: "CXA81 → Query POWER state"
-      - uart.write: "#01,02\r"
+      - uart.write: "#01,01\r"
       - delay: 200ms
 
       # --- Mute state ---
       - logger.log: "CXA81 → Query MUTE state"
-      - uart.write: "#01,04\r"
+      - uart.write: "#01,03\r"
       - delay: 200ms
 
       # --- Current input/source ---
@@ -367,3 +367,4 @@ script:
 
           // vissza idle
           id(controlbus_out).set_state(false);
+
