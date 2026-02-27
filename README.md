@@ -38,5 +38,5 @@ Connections:
     GPIO17 - RS232 board
     GPIO21 - TXS0108E level shifter (GND, 3,3V and 5V!)
 
-![vol up](https://github.com/user-attachments/assets/105c4b0a-1a1b-4f40-8a94-7caa99686a62)
+<img width="1105" height="1377" alt="vol decode" src="https://github.com/user-attachments/assets/99164749-814c-49e0-9a42-da761cdc37bc" />
 
